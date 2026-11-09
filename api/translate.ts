@@ -28,14 +28,8 @@ export default async function handler(req: any, res: any) {
     return res.status(400).json({ error: "Choose two different languages." });
   }
 
-  const baseUrl = process.env.LIBRETRANSLATE_URL || "https://libretranslate.com";
+  const baseUrl = process.env.LIBRETRANSLATE_URL || "https://translate.fedilab.app";
   const apiKey = process.env.LIBRETRANSLATE_API_KEY;
-  if (!apiKey && baseUrl.includes("libretranslate.com")) {
-    return res.status(503).json({
-      error: "Translation service is not configured yet. Add LIBRETRANSLATE_API_KEY to your Vercel project environment variables.",
-    });
-  }
-
   try {
     const endpoint = `${baseUrl.replace(/\/$/, "")}/translate`;
     const upstream = await fetch(endpoint, {
