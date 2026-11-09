@@ -385,6 +385,42 @@ function App() {
           </p>
         </section>
 
+        <section aria-labelledby="about-syntra" className="mt-10 space-y-5 rounded-2xl border border-slate-800 bg-slate-900/50 p-5 sm:p-7">
+          <div>
+            <h2 id="about-syntra" className="text-xl font-bold text-white sm:text-2xl">Translate text online with Syntra</h2>
+            <p className="mt-2 max-w-3xl text-sm leading-7 text-slate-400">
+              Syntra Translator helps you translate text between languages in one simple workspace.
+              Choose a source language or let the translation service detect it, select your target
+              language, and translate. You can also enter text with your microphone, listen to the
+              translated result, and copy it for use in messages, study, or everyday communication.
+            </p>
+          </div>
+          <div className="grid gap-5 sm:grid-cols-2">
+            <div>
+              <h3 className="font-semibold text-slate-200">How to use Syntra</h3>
+              <ol className="mt-2 list-inside list-decimal space-y-1.5 text-sm leading-6 text-slate-400">
+                <li>Type or dictate the text you want to translate.</li>
+                <li>Choose the source and target languages.</li>
+                <li>Select Translate text and wait for the result.</li>
+                <li>Listen to the result or copy it to your clipboard.</li>
+              </ol>
+            </div>
+            <div>
+              <h3 className="font-semibold text-slate-200">Voice and language support</h3>
+              <p className="mt-2 text-sm leading-6 text-slate-400">
+                Voice input and spoken output use features provided by your browser and device.
+                Translation language pairs depend on the models available from the configured
+                translation provider.
+              </p>
+            </div>
+          </div>
+          <p className="border-t border-slate-800 pt-4 text-xs leading-6 text-slate-500">
+            Privacy note: text submitted for translation is sent to the translation provider configured
+            for this service so it can be processed. Microphone access is requested only when you
+            choose voice input.
+          </p>
+        </section>
+
         <footer className="mt-8 text-center text-sm text-slate-500">
           <p>Syntra Translator · Make every language easier to understand.</p>
         </footer>
