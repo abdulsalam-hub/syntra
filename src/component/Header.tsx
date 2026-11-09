@@ -1,18 +1,17 @@
-import React from 'react'
-
-
-
-const Header = () => {
-  return (
-    <header className="mb-8 text-center">
-      <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-emerald-400 mb-2">
+const Header = () => (
+  <header className="mb-8 text-center">
+    <a href="/" className="inline-block rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400">
+      <span className="bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-4xl font-extrabold tracking-tight text-transparent sm:text-5xl">
         Syntra Translator
-      </h1>
-      <p className="">Real-time voice and text translation</p>
-      <span className="text-slate-400">
-        effortlessly control voice and text translation with syntra
       </span>
-    </header>
-  );
-}
-export default Header
+    </a>
+    <p className="mt-3 text-base text-slate-300 sm:text-lg">
+      Understand more. Connect without language barriers.
+    </p>
+    <p className="mx-auto mt-2 max-w-xl text-sm leading-6 text-slate-500">
+      Translate text between languages, use your voice to enter text, and listen to translated results.
+    </p>
+  </header>
+);
+
+export default Header;
