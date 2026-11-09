@@ -1,73 +1,67 @@
-# React + TypeScript + Vite
+# Syntra Translator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Syntra is a responsive text and voice translation web app built with React, TypeScript, Vite, and Tailwind CSS.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Translate text using a LibreTranslate-compatible API.
+- Detect the source language automatically.
+- Choose source and target languages and swap them.
+- Voice input using the browser Speech Recognition API where supported.
+- Listen to translations using browser text-to-speech.
+- Copy translated text and receive clear error feedback.
+- Responsive interface and accessibility-focused controls.
+- Search metadata, Open Graph tags, canonical URL, sitemap, and robots.txt.
 
-## React Compiler
+## Tech stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React 19 + TypeScript
+- Vite
+- Tailwind CSS 4
+- Lucide React
+- LibreTranslate-compatible translation service
 
-## Expanding the ESLint configuration
+## Local development
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Configure translation
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+The production translation endpoint is a Vercel serverless function at `/api/translate`. It sends requests to a LibreTranslate-compatible service from the server, so API credentials are not exposed in browser code.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Create a `.env.local` file for local development:
+
+```env
+LIBRETRANSLATE_URL=https://libretranslate.com
+LIBRETRANSLATE_API_KEY=your_api_key
 ```
+
+For Vercel deployment, add the same variables under **Project Settings → Environment Variables**, then redeploy.
+
+- `LIBRETRANSLATE_URL`: Base URL of your LibreTranslate instance. For a self-hosted instance, use its URL.
+- `LIBRETRANSLATE_API_KEY`: Required for the managed `libretranslate.com` service; optional for self-hosted instances that do not require a key.
+
+Never use a `VITE_` prefix for the API key. Vite exposes `VITE_` variables to browser code.
+
+The translation provider only supports language pairs for which it has models installed. Check your provider's supported-language list before advertising a language as available. Browser speech recognition and speech synthesis support varies by browser and device.
+
+## Production checks
+
+```bash
+npm run lint
+npm run build
+```
+
+## SEO deployment checklist
+
+1. Confirm the canonical domain in `index.html` and `public/sitemap.xml`.
+2. Add the production translation environment variables to Vercel.
+3. Redeploy and test text translation, language detection, microphone permission, text-to-speech, and clipboard access on desktop and mobile.
+4. Submit `https://syntratranslate.vercel.app/sitemap.xml` in Google Search Console.
+
+## License
+
+Add your preferred license before accepting external contributions.
