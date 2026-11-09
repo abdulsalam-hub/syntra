@@ -30,19 +30,20 @@ npm run dev
 
 ## Configure translation
 
-The production translation endpoint is a Vercel serverless function at `/api/translate`. It sends requests to a LibreTranslate-compatible service from the server, so API credentials are not exposed in browser code.
+The translation endpoint is a Vercel serverless function at `/api/translate`. It sends requests to a LibreTranslate-compatible service from the server, so API credentials are not exposed in browser code. By default, it uses the public `translate.fedilab.app` mirror, which is listed by LibreTranslate as not requiring an API key. Public mirrors can have rate limits or downtime; use a managed API key or a self-hosted instance for a more dependable production service.
 
 Create a `.env.local` file for local development:
 
 ```env
-LIBRETRANSLATE_URL=https://libretranslate.com
+LIBRETRANSLATE_URL=https://translate.fedilab.app
+# Optional: only add this when your chosen provider requires an API key
 LIBRETRANSLATE_API_KEY=your_api_key
 ```
 
 For Vercel deployment, add the same variables under **Project Settings → Environment Variables**, then redeploy.
 
-- `LIBRETRANSLATE_URL`: Base URL of your LibreTranslate instance. For a self-hosted instance, use its URL.
-- `LIBRETRANSLATE_API_KEY`: Required for the managed `libretranslate.com` service; optional for self-hosted instances that do not require a key.
+- `LIBRETRANSLATE_URL`: Base URL of your LibreTranslate instance. Defaults to the public Fedilab mirror; for managed hosting or a self-hosted instance, set your own URL.
+- `LIBRETRANSLATE_API_KEY`: Required by providers such as `libretranslate.com`; optional for mirrors or self-hosted instances that do not require a key. Obtain a managed key from the official LibreTranslate portal.
 
 Never use a `VITE_` prefix for the API key. Vite exposes `VITE_` variables to browser code.
 
