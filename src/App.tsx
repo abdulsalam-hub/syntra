@@ -50,7 +50,7 @@ const MAX_CHARACTERS = 5000;
 function App() {
   const [inputText, setInputText] = useState("");
   const [translatedText, setTranslatedText] = useState("");
-  const [sourceLang, setSourceLang] = useState("auto");
+  const [sourceLang, setSourceLang] = useState("en");
   const [targetLang, setTargetLang] = useState("fr");
   const [isListening, setIsListening] = useState(false);
   const [isTranslating, setIsTranslating] = useState(false);
@@ -255,7 +255,7 @@ function App() {
                 onChange={(event) => setSourceLang(event.target.value)}
                 className="w-full rounded-xl border border-slate-700 bg-slate-800 px-3 py-3 text-sm text-white outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20"
               >
-                <option value="auto">Detect language</option>
+                <option value="auto">Auto detect (not available on free provider)</option>
                 {LANGUAGES.map((language) => (
                   <option key={language.code} value={language.code}>{language.name}</option>
                 ))}
